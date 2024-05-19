@@ -1,5 +1,6 @@
 package net.vatri.ecommerce.controllers;
 
+import com.graphqlify.annotation.GraphQLType;
 import net.vatri.ecommerce.cart.CartItem;
 import net.vatri.ecommerce.cart.CartService;
 import net.vatri.ecommerce.hateoas.OrderResource;
@@ -32,6 +33,7 @@ public class CartController extends CoreController{
     }
 
     @PostMapping("/")
+    @GraphQLType(name = "createCart")
     public String create(){
         return cartService.createNewCart();
     }

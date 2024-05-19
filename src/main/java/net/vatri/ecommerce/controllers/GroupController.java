@@ -1,5 +1,6 @@
 package net.vatri.ecommerce.controllers;
 
+import com.graphqlify.annotation.GraphQLType;
 import net.vatri.ecommerce.hateoas.GroupResource;
 import net.vatri.ecommerce.models.ProductGroup;
 import net.vatri.ecommerce.services.EcommerceService;
@@ -44,6 +45,7 @@ public class GroupController extends CoreController{
     }
 
     @GetMapping("/{id}")
+    @GraphQLType(name = "viewGroupResource")
     public GroupResource view(@PathVariable("id") long id){
         GroupResource gr = new GroupResource(ecommerceService.getGroup(id));
         gr.add(createHateoasLink(id));
@@ -51,6 +53,7 @@ public class GroupController extends CoreController{
     }
 
     @PostMapping(value = "/{id}")
+    @GraphQLType(name = "editProductGroup")
     public ProductGroup edit(@PathVariable(value = "id", required = false) long id, @RequestBody @Valid ProductGroup group){
 
         ProductGroup updatedGroup = ecommerceService.getGroup(id);
@@ -72,6 +75,7 @@ public class GroupController extends CoreController{
     }
 
     @PostMapping
+    @GraphQLType(name = "createProductGroup")
     public ProductGroup create(@RequestBody @Valid ProductGroup group){
 
         // We must do this manually b/c of Hibernate.

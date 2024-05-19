@@ -1,7 +1,9 @@
 package net.vatri.ecommerce.hateoas;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.graphqlify.annotation.GraphQLType;
 import net.vatri.ecommerce.models.Product;
+import net.vatri.ecommerce.models.ProductGroup;
 import org.springframework.hateoas.ResourceSupport;
 
 public class ProductResource extends ResourceSupport {
@@ -11,6 +13,7 @@ public class ProductResource extends ResourceSupport {
     public String name;
     public String price;
     public String description;
+    @GraphQLType(type = ProductGroup.class)
     public Object group;
 
     public ProductResource(Product model){

@@ -1,5 +1,6 @@
 package net.vatri.ecommerce.controllers;
 
+import com.graphqlify.annotation.GraphQLType;
 import net.vatri.ecommerce.hateoas.OrderResource;
 import net.vatri.ecommerce.models.Order;
 import net.vatri.ecommerce.services.EcommerceService;
@@ -28,6 +29,7 @@ public class OrderController extends CoreController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @GraphQLType(name = "orderResourceIndex")
     public List<OrderResource> index() {
         List<Order> orders = ecommerceService.getOrders();
         List<OrderResource> out = new ArrayList<OrderResource>();
@@ -60,6 +62,7 @@ public class OrderController extends CoreController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    @GraphQLType(name = "editOrder")
     public Order edit(@PathVariable("id") long id, @RequestBody @Valid Order order){
 
         Order updatedOrder = ecommerceService.getOrder(id);

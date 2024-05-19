@@ -1,5 +1,6 @@
 package net.vatri.ecommerce.controllers;
 
+import com.graphqlify.annotation.GraphQLType;
 import net.vatri.ecommerce.hateoas.ProductResource;
 import net.vatri.ecommerce.models.Product;
 import net.vatri.ecommerce.models.ProductImage;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @RestController
 @RequestMapping("/product")
@@ -43,6 +45,7 @@ public class ProductController extends CoreController{
     }
 
     @GetMapping
+    @GraphQLType(name = "productResourceIndex")
     public List<ProductResource> index() {
         List<Product> res = ecommerceService.getProducts();
         List<ProductResource> output = new ArrayList<ProductResource>();
@@ -56,6 +59,7 @@ public class ProductController extends CoreController{
     }
 
     @PostMapping
+    @GraphQLType(name = "createProduct")
     public Product create(@RequestBody @Valid Product product){
         return ecommerceService.saveProduct(product);
     }
@@ -123,7 +127,7 @@ public class ProductController extends CoreController{
     }
 
     @PostMapping("/{id}/uploadimage")
-    public String handleFileUpload(@PathVariable("id") String id, @RequestParam("file") MultipartFile file) {
+    public String handleFileUpload(@PathVariable("id") String id, @GraphQLType(type = CommonsMultipartFile.class) @RequestParam("file") MultipartFile file) {
 
         // Relative path to the rootLocation in storageService
         String path = "/product-images/" + id;
