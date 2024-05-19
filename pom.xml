@@ -22,9 +22,20 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<graphqlify.version>1.0.0-SNAPSHOT</graphqlify.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.petra.graphqlify</groupId>
+			<artifactId>graphqlify-java-processor-engine</artifactId>
+			<version>${graphqlify.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.petra.graphqlify</groupId>
+			<artifactId>graphqlify-java-springweb-plugin</artifactId>
+			<version>${graphqlify.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -94,6 +105,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<showWarnings>true</showWarnings>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
