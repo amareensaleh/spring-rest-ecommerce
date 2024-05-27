@@ -9,6 +9,7 @@ import net.vatri.ecommerce.storage.StorageService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpHeaders;
@@ -65,6 +66,7 @@ public class ProductController extends CoreController{
     }
 
     @GetMapping("/{id}")
+    @GraphQLType(type = ProductResource.class)
     public ResourceSupport view(@PathVariable("id") long id){
         Product p = ecommerceService.getProduct(id);
 
@@ -102,6 +104,7 @@ public class ProductController extends CoreController{
 
     @GetMapping("/image/{id}")
     @ResponseBody
+    @GraphQLType(type = FileSystemResource.class)
     public ResponseEntity<Resource> serveFile(@PathVariable("id") String id) {
 
         Session session = sessionFactory.openSession();
