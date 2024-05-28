@@ -55,6 +55,7 @@ public class OrderController extends CoreController {
     }
 
     @RequestMapping("/{id}")
+    @GraphQLType(name = "viewOrder")
     public OrderResource view(@PathVariable("id") long id){
         OrderResource orderResource = new OrderResource(ecommerceService.getOrder(id));
         orderResource.add(createHateoasLink(id));

@@ -23,7 +23,6 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @RestController
 @RequestMapping("/product")
@@ -130,7 +129,7 @@ public class ProductController extends CoreController{
     }
 
     @PostMapping("/{id}/uploadimage")
-    public String handleFileUpload(@PathVariable("id") String id, @GraphQLType(type = CommonsMultipartFile.class) @RequestParam("file") MultipartFile file) {
+    public String handleFileUpload(@PathVariable("id") String id, @RequestParam("file") MultipartFile file) {
 
         // Relative path to the rootLocation in storageService
         String path = "/product-images/" + id;
